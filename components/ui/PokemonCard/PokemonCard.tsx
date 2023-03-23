@@ -9,7 +9,7 @@ export interface PokemonCardProps {
 const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon: { id, name, image } }) => {
 	const router = useRouter();
 	const handleGoToPokemon = () => {
-		router.push(`/pokemon/${id}`);
+		router.push(`/name/${name}`);
 	};
 
 	return (

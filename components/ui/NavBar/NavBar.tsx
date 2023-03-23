@@ -1,42 +1,30 @@
 import Image from 'next/image';
-import { Spacer, useTheme, Text, Input } from '@nextui-org/react';
-import generateRandom from '@/utils/randomNumber';
+import { Spacer, useTheme, Text, Row, Container } from '@nextui-org/react';
+import Link from 'next/link';
 export interface NavBarProps {}
 
 const NavBar: React.FC<NavBarProps> = () => {
 	const { theme } = useTheme();
 
 	return (
-		<div
-			style={{
-				display: 'flex',
-				width: '100%',
-				flexDirection: 'row',
-				alignItems: 'center',
-				justifyContent: 'start',
-				padding: '0x 50px',
-				backgroundColor: theme?.colors.gray100.value,
-			}}>
-			<div
-				style={{
-					padding: '10px',
-				}}>
-				<Image
-					src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg'
-					alt='icono de la app'
-					width={70}
-					height={70}
-				/>
-			</div>
-			<Text color='white' h2>
-				P
-			</Text>
-			<Text color='white' h3>
-				okémon
-			</Text>
-			{/* <Input placeholder='Next UI' /> */}
-			<Spacer css={{ flex: 1 }} />
-		</div>
+		<Container css={{ backgroundColor: theme?.colors.gray100.value }}>
+			<Row justify='space-between'>
+				<Link href='/' passHref>
+					<Row>
+						<Text h2>Po</Text>
+						<Text h2 color='secondary'>
+							kemon
+						</Text>
+					</Row>
+				</Link>
+				<Spacer x={1} />
+				<Link href='/favorites' passHref>
+					<Text h2 color='secondary'>
+						Favoritos
+					</Text>
+				</Link>
+			</Row>
+		</Container>
 	);
 };
 
