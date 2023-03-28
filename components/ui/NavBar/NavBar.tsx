@@ -24,7 +24,7 @@ const NavBar: React.FC<NavBarProps> = () => {
 			css={{
 				maxW: '100%',
 			}}>
-			<Navbar variant='static' isBordered>
+			<Navbar variant='static'>
 				<Navbar.Brand
 					css={{
 						'@xs': {

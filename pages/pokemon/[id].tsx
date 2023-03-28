@@ -1,11 +1,12 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { MainLayout } from '@/components/layouts/MainLayout';
 import { PokemonInfo } from '@/interfaces';
-import { Button, Card, Container, Grid, Text, Image } from '@nextui-org/react';
+import { Button, Card, Container, Grid, Text, Image, Badge } from '@nextui-org/react';
 import { localFavorites } from '@/utils';
 import { useState } from 'react';
 import { getPokemonInfo } from '../../utils/getPokemonInfo';
 import confetti from 'canvas-confetti';
+import { pokemonTypesColors } from '@/constants/colors';
 
 interface PokemonPageProps {
 	pokemon: PokemonInfo;
@@ -49,7 +50,12 @@ const PokemonPage: NextPage<PokemonPageProps> = ({ pokemon }) => {
 				</Grid>
 				<Grid xs={12} sm={8}>
 					<Card isHoverable css={{ padding: '30px' }}>
-						<Card.Header css={{ display: 'flex', justifyContent: 'space-between' }}>
+						<Card.Header
+							css={{
+								display: 'flex',
+								justifyContent: 'space-between',
+								flexWrap: 'wrap',
+							}}>
 							<Text h1 transform='capitalize'>
 								{pokemon.name}
 							</Text>
@@ -89,6 +95,22 @@ const PokemonPage: NextPage<PokemonPageProps> = ({ pokemon }) => {
 									width={100}
 									height={100}
 								/>
+							</Container>
+							<Text h3>Types</Text>
+							<Container display='flex' direction='row' justify='space-between'>
+								{pokemon.types.map((type, index) => (
+									<Badge
+										enableShadow
+										disableOutline
+										key={index}
+										css={{
+											backgroundColor: pokemonTypesColors.find(
+												color => color.type === type.type.name
+											)?.color,
+										}}>
+										{type.type.name.toLocaleUpperCase()}
+									</Badge>
+								))}
 							</Container>
 						</Card.Body>
 					</Card>

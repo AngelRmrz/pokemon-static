@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Card, Row, Text, Col, Button } from '@nextui-org/react';
+import { Badge, Card, Row, Text } from '@nextui-org/react';
 import { SmallPokemon } from '@/interfaces';
 import { useRouter } from 'next/router';
 import { pokemonTypesColors } from '../../../constants/colors';
@@ -28,7 +28,6 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
 				'&:hover': {
 					transition: '0.5s',
 					boxShadow: `0px 0px 15px 0px ${mainColorGlow?.color}`,
-					// backgroundColor: `${mainColorGlow?.color}`,
 				},
 			}}>
 			<Card.Header>
@@ -45,6 +44,24 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
 			<Card.Body>
 				<Card.Image src={image} alt={name} width='100%' height={200} />
 			</Card.Body>
+			<Card.Divider />
+			<Card.Footer isBlurred>
+				<Row justify='space-between' align='center'>
+					<Text h3>{types.length > 1 ? 'Types:' : 'Type:'}</Text>
+					{types.map((type, index) => (
+						<Badge
+							enableShadow
+							disableOutline
+							key={index}
+							css={{
+								backgroundColor: pokemonTypesColors.find(color => color.type === type)
+									?.color,
+							}}>
+							{type.toLocaleUpperCase()}
+						</Badge>
+					))}
+				</Row>
+			</Card.Footer>
 		</Card>
 	);
 };
